@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "outDir": "./js",
+        "allowJs": true,
+        "target": "es2015",
+        "strictNullChecks": true,
+        "module": "es2015",
+        "sourceMap": true
+    },
+    "include": [
+        "./ts/**/*"
+    ],
+    "exclude": [
+        "./js/"
+    ],
+    "compileOnSave": false
+}
