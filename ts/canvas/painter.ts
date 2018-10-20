@@ -5,10 +5,9 @@ export { Coordinate, Canvas, Context2D }
 type Canvas = HTMLCanvasElement
 type Context2D = CanvasRenderingContext2D
 class Coordinate {
-    axison : boolean
     constructor(private ctx: Context2D,
-        public readonly width: number,
-        public readonly height: number) { this.axison = true }
+        public readonly width: ()=>number,
+        public readonly height: ()=>number) { }
     //Regularize the coordinate 
     /*
     @----------->x (0,width)	  => 	  	    y (-1,1)
@@ -20,8 +19,8 @@ class Coordinate {
     y (0,height)					 	   		|
     */
 
-    private axis() {
-        const [w, h] = [this.width, this.height]
+    axis() {
+        const [w, h] = [this.width(), this.height()]
 
         this.ctx.fillStyle = '#e51c23'
         this.ctx.fillRect(Math.floor(w * 0.5) - 1, 0, 2, h)  //y
@@ -42,23 +41,23 @@ class Coordinate {
     }
 
     private toRelX(absX: number): number {
-        const half_w = this.width * 0.5
+        const half_w = this.width() * 0.5
         return (absX - half_w) / half_w
     }
 
     private toRelY(absY: number): number {
-        const half_h = this.height * 0.5
+        const half_h = this.height() * 0.5
         return (half_h - absY) / half_h
     }
 
     private toAbsXY(relXY: [number, number]): [number, number] {
         const [relX, relY] = relXY
-        const [half_w, half_h] = [this.width * 0.5, this.height * 0.5]
+        const [half_w, half_h] = [this.width() * 0.5, this.height() * 0.5]
         return [(relX * half_w) + half_w, half_h - (half_h * relY)]
     }
 
     renderSDF(shapes: Shape[]) {
-        const [w, h] = [this.width, this.height]
+        const [w, h] = [this.width(), this.height()]
 
         let data = this.ctx.getImageData(0, 0, w, h)
         let pixels = data.data
@@ -88,6 +87,5 @@ class Coordinate {
             }
         }
         this.ctx.putImageData(data, 0, 0)
-        if(this.axison)this.axis()
     }
 }

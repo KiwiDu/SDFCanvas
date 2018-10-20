@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" type="text/css" href="./dist/main.css"/>
-    </head>
-    <body>
-        <div id="main">
-            <canvas id="cvs" width="700" height="700"></canvas>
-            <form id="fm"> 
-                <input type="button" id="save" value="Save"/>
-                <input type="button" id="do" value="Do"/>
-                <!-- input type="text" id="cmd" value="circle(0,0,0.1)"/-->
-                <input type="checkbox" id='axis' value="Axis" />
-            </form>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./dist/main.css" />
+</head>
+
+<body>
+    <div id="main" class="col">
+        <div id="canvases">
+            <div class="vol">
+                <canvas id="cvs" width="500" height="500"></canvas>
+            </div>
+            <div class="vol">
+                <canvas id="axis" width="1000" height="1000"></canvas>
+            </div>
         </div>
-        <script src="./dist/app.js"></script>
-    </body>
-    
+        <form id="fm" class="col">
+            <div class="row">
+                <input type="button" id="save" value="Save" class="unit"/>
+                <input type="button" id="do" value="Do" class="unit"/>
+            </div>
+            <!-- input type="text" id="cmd" value="circle(0,0,0.1)"/-->
+
+            <div class="row">
+                <div>
+                    <input type="checkbox" id='axison' value="axis" />
+                    <label for="axison"> Axis </label>
+                </div>
+
+                <div>
+                    <input type="checkbox" id='res' value="HighRes" />
+                    <label for="res">High Res</label>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <script src="./dist/app.js"></script>
+</body>
+
 </html>

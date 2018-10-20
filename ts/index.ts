@@ -2,11 +2,9 @@ import { Shape, Dot, Segment, Capsule, Circle, _ } from './geo/pack';
 import { Coordinate, Canvas, Context2D } from './canvas/painter'
 
 function init_canvas(cvs: Canvas): Coordinate {
-	const w = cvs.width,
-		h = cvs.height
 	let ctx: Context2D = cvs.getContext('2d')!
 	ctx.imageSmoothingEnabled = false			//pixel level rendering
-	return new Coordinate(ctx, w, h)
+	return new Coordinate(ctx, ()=>cvs.width, ()=>cvs.height)
 }
 
 function getCanvas(cvs_id: string): Canvas {
@@ -23,6 +21,9 @@ function main() {//the entry that register everything
 
 	let canvas = getCanvas('cvs')
 	let painter = init_canvas(canvas)
+	let axis=getCanvas('axis')
+	let axispainter=init_canvas(axis)
+	axispainter.axis()
 
 	//behaviours
 	let shape_list: Shape[] = []
@@ -31,18 +32,29 @@ function main() {//the entry that register everything
 	shape_list.push(_(_(-0.25, 0.1), 0.25))
 
 	//event bindings
-	let savebtn = document.getElementById('save')
-	savebtn!.addEventListener('click', () => {
+	let saveBtn = document.getElementById('save')
+	saveBtn!.addEventListener('click', () => {
 		save(canvas)
 	})
 
-	let dobtn = document.getElementById('do')
-	dobtn!.addEventListener('click', () => {
+	let doBtn = document.getElementById('do')
+	doBtn!.addEventListener('click', () => {
 		painter.renderSDF(shape_list)
 	})
 
-	let axisCkBx = <HTMLInputElement>document.getElementById('axis')
-	axisCkBx!.addEventListener('change',(ev)=>painter.axison = (axisCkBx!.checked))
+
+	 let axisCkBx = <HTMLInputElement>document.getElementById('axison')
+	axisCkBx!.addEventListener('change', (ev) =>{
+			axis.style.display = (axisCkBx!.checked)?"box":"none"
+	}) 
+
+	 let resCkBx = <HTMLInputElement>document.getElementById('res')
+	resCkBx!.addEventListener('change', (ev) => {
+		let val = (resCkBx!.checked)?'1000':'500'
+		canvas.setAttribute('width',val)
+		canvas.setAttribute('height',val)
+		painter.renderSDF(shape_list)
+	})
 
 	//init
 	painter.renderSDF(shape_list)
