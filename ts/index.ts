@@ -4,7 +4,7 @@ import { Coordinate, Canvas, Context2D } from './canvas/painter'
 function init_canvas(cvs: Canvas): Coordinate {
 	let ctx: Context2D = cvs.getContext('2d')!
 	ctx.imageSmoothingEnabled = false			//pixel level rendering
-	return new Coordinate(ctx, ()=>cvs.width, ()=>cvs.height)
+	return new Coordinate(ctx, () => cvs.width, () => cvs.height)
 }
 
 function getCanvas(cvs_id: string): Canvas {
@@ -21,8 +21,8 @@ function main() {//the entry that register everything
 
 	let canvas = getCanvas('cvs')
 	let painter = init_canvas(canvas)
-	let axis=getCanvas('axis')
-	let axispainter=init_canvas(axis)
+	let axis = getCanvas('axis')
+	let axispainter = init_canvas(axis)
 	axispainter.axis()
 
 	//behaviours
@@ -43,16 +43,17 @@ function main() {//the entry that register everything
 	})
 
 
-	 let axisCkBx = <HTMLInputElement>document.getElementById('axison')
-	axisCkBx!.addEventListener('change', (ev) =>{
-			axis.style.display = (axisCkBx!.checked)?"box":"none"
-	}) 
+	let axisCkBx = <HTMLInputElement>document.getElementById('axison')
+	axisCkBx.checked=true
+	axisCkBx!.addEventListener('change', (ev) => {
+		axis.style.display = (axisCkBx!.checked) ? "" : "none"
+	})
 
-	 let resCkBx = <HTMLInputElement>document.getElementById('res')
+	let resCkBx = <HTMLInputElement>document.getElementById('res')
 	resCkBx!.addEventListener('change', (ev) => {
-		let val = (resCkBx!.checked)?'1000':'500'
-		canvas.setAttribute('width',val)
-		canvas.setAttribute('height',val)
+		let val = (resCkBx!.checked) ? '1000' : '500'
+		canvas.setAttribute('width', val)
+		canvas.setAttribute('height', val)
 		painter.renderSDF(shape_list)
 	})
 
