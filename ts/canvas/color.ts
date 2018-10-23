@@ -6,17 +6,27 @@ class Color {
     constructor(public readonly R: number,
         public readonly G: number,
         public readonly B: number) { }
+
+    public valid(): boolean {
+        return this.R > 0 && this.G > 0 && this.B > 0
+    }
+
+    static Empty: Color = new Color(-1, -1, -1)
+
+    public static factory(opr: () => number): Color {
+        return new Color(opr(), opr(), opr())
+    }
 }
 
 type ChannelData = Uint8ClampedArray
 type reduce<T> = (a: T, b: T) => T
 
-function fromHex(hex:string){
+/* function fromHex(hex:string){
     let reg=/#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/
     let ret = hex.match(reg)
     let res = ret![0]
     return res
-}
+} */
 
 function fill_pixel(data: ChannelData, i: number, color: Color): void {
     data[4 * i] = color.R
@@ -48,6 +58,8 @@ class BlendMode {
 }
 
 function blend_pixel(data: ChannelData, i: number, color: Color, alpha: number, opr: reduce<number>): void {
+    if (!color.valid()) { return }
+
     let op = (a, b) => range(0, 255, opr(a, b))
     let c = [color.R, color.G, color.B]
     for (let j = 0; j < 3; j++) {

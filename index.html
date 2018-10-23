@@ -4,6 +4,8 @@
 
 <head>
     <meta charset="UTF-8" />
+    <title>SDFCanvas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./dist/main.css" />
 </head>
 
@@ -19,7 +21,12 @@
         </div>
         <form id="fm" class="col">
             <!-- input type="text" id="cmd" value="circle(0,0,0.1)"/-->
-
+            <!--div id = "colors" class="row">
+                <div style="flex:1"></div>
+                <div style="flex:1"></div>
+                <div style="flex:1"></div>
+                <div style = "flex:2"></div>
+            </div-->
             <div class="row">
                 <div>
                     <input type="checkbox" id='axison' value="axis" />
@@ -33,9 +40,9 @@
 
             </div>
             <div class="row">
-                    <input type="button" id="save" value="Save" class="unit"/>
-                    <input type="button" id="do" value="Do" class="unit"/>
-                </div>
+                <input type="button" id="save" value="Save" class="unit" />
+                <input type="button" id="do" value="Do" class="unit" />
+            </div>
         </form>
     </div>
     <script src="./dist/app.js"></script>

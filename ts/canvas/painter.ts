@@ -4,10 +4,20 @@ import { Color, blend_pixel, BlendMode } from './color'
 export { Coordinate, Canvas, Context2D }
 type Canvas = HTMLCanvasElement
 type Context2D = CanvasRenderingContext2D
+
+function set<K, V>(keys: K[], vals: V[]) {
+    let map = new Map<K, V | null>()
+    for (let i = 0; i < keys.length; i++) {
+        let val = i < vals.length ? vals[i] : null
+        map.set(keys[i], val)
+    }
+    return map
+}
+
 class Coordinate {
     constructor(private ctx: Context2D,
-        public readonly width: ()=>number,
-        public readonly height: ()=>number) { }
+        public readonly width: () => number,
+        public readonly height: () => number) { }
     //Regularize the coordinate 
     /*
     @----------->x (0,width)	  => 	  	    y (-1,1)
@@ -56,13 +66,13 @@ class Coordinate {
         return [(relX * half_w) + half_w, half_h - (half_h * relY)]
     }
 
-    renderSDF(shapes: Shape[]) {
+    renderSDF(shapes: Shape[], colors: Color[]) {
         const [w, h] = [this.width(), this.height()]
 
         let data = this.ctx.getImageData(0, 0, w, h)
         let pixels = data.data
         pixels.fill(255)
-        for (let shape of shapes) {
+        for (let [shape, color] of set(shapes, colors)) {
             console.log(shape)
             let [minX, minY] = this.toAbsXY(shape.aabb().min)
             let [maxX, maxY] = this.toAbsXY(shape.aabb().max)
@@ -71,16 +81,20 @@ class Coordinate {
             maxX = Math.ceil(maxX)
             maxY = Math.ceil(maxY)
             let x, y
-            let color = new Color(Math.random()*255, Math.random()*255, Math.random()*255)
+            //let color = new Color(Math.random()*255, Math.random()*255, Math.random()*255)
             for (let absY = maxY; absY < minY; absY++) {
                 y = this.toRelY(absY)
                 for (let absX = minX; absX < maxX; absX++) {
                     x = this.toRelX(absX)
                     let ret = shape.sdf(_(x, y))
-                    ret = 1 - threshold(-0.001, 0.001, ret)		//calculate
-
+                    //ret = 1 - threshold(-0.001, 0.001, ret)		//calculate
+                    
+                    ret = 1 - threshold(-0.001, 0.001, ret)
+                    if (color == null) {
+                        color = Color.Empty
+                    }
                     blend_pixel(pixels, absY * w + absX,
-                        color,ret,
+                        color, ret,
                         BlendMode.Multiply
                     )
                 }
