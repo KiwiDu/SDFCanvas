@@ -1,17 +1,24 @@
 {
     "compilerOptions": {
-        "outDir": "./js",
+        //"outDir": "./js",
         "allowJs": true,
         "target": "es2015",
-        "strictNullChecks": true,
+        //"strictNullChecks": true,
+        "jsx": "react",
         "module": "es2015",
-        "sourceMap": true
+        "sourceMap": true,
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
     },
     "include": [
-        "./ts/**/*"
+        "./src/ts/**/*"
     ],
     "exclude": [
-        "./js/"
+        "./dist/"
+    ],
+    "lib": [
+        "es2016"
     ],
     "compileOnSave": false
 }

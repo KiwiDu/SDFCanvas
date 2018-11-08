@@ -5,11 +5,6 @@ body {
     max-height: 100vh;
 }
 
-div#colors{
-    height: 2vmin;
-    width: 100vmin;
-}
-
 .col {
     display: flex;
     justify-content: space-around;
@@ -32,7 +27,7 @@ div#colors{
     }
 
     html {
-        font-size: 5vh !important;
+        font-size: 4vh !important;
     }
 }
 
@@ -90,6 +85,11 @@ div#colors{
 
 
 .unit {
+    flex: 1;
+    display: inline-flex;
+}
+
+.unit *{
     flex: 1;
 }
 
@@ -179,7 +179,9 @@ input[type="checkbox"]+label::before {
     margin-right: 1vmin;
     border: #222 solid 2px;
     border-radius: 0.2rem;
-    content: ' ';
+    content: '';
+    width: 1em;
+    height: 1em;
 
     text-align: center;
     padding: auto;
@@ -187,5 +189,7 @@ input[type="checkbox"]+label::before {
 
 
 input[type="checkbox"]:checked+label::before {
-    content: '\2714';
+    content: url('../img/tick.svg');
+    width: 1em;
+    height: 1em;
 }

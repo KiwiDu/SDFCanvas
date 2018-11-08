@@ -1,0 +1,68 @@
+div.combox ul {
+    padding: 0;
+    background-color: #aaa;
+    margin: 0;
+    list-style: none;
+    position: fixed;
+    margin-top: 0.3rem;
+    /* width: 100%; */
+    margin-left: -0.3rem;
+    border-radius: 0 0 0.2rem 0.2rem;
+    overflow: hidden;
+    z-index: 99;
+    font-size: 1rem
+}
+
+div.combox ul li {
+    padding: 0.3rem;
+    color: #222;
+    font-size: 0.8rem;
+}
+
+div.combox ul li:hover{
+    background: #3f51b5 !important;
+    color: #fff;
+}
+
+div.combox ul li.even {
+    background: #ccc;
+}
+
+div.combox ul li.odd {
+    background: #bbb;
+}
+
+/* ul li:last-child {
+    border-bottom: 0px !important;
+} */
+
+div.combox p{
+    padding: 0.3rem;
+    margin: 0;
+}
+
+div.combox {
+    margin: 0.3rem;
+    padding: 0.3rem;
+    padding-right: 3rem;
+    border-radius: 0.3rem;
+    background: #ccc;
+    color: #222;
+    position: relative;
+    display: inline-block;
+}
+
+div.combox.expanded {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+div.combox::after {
+    position: absolute;
+    right: 1rem;
+    top: 0.6rem;
+    content: url('../img/downtri.svg');
+    width: 1.2rem;
+    height: 1.2rem;
+    filter: opacity(0.5);
+}

@@ -1,6 +1,6 @@
 import {Matrix} from '../scimath/matrix'//class
 import {Shape,Pair,Dot,Vector} from './geomath'//fundamental shapes
-import {dotProduct,dis,dis_sqr,len,opr} from './geomath'//methods
+//import {dotProduct,dis,dis_sqr,len,opr} from './geomath'//methods
 import {Line, Segment,Capsule,Circle} from './shapes'//additional shapes
 
 export {Matrix}
