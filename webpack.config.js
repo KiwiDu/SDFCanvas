@@ -69,7 +69,13 @@ module.exports = {
                         options: {
                             happyPackMode: true // IMPORTANT! use happyPackMode mode to speed-up compilation and reduce errors reported to webpack
                         }
-                    }
+                    },
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env']
+                        }
+                    },
                 ]
             }
         ]

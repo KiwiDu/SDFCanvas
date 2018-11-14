@@ -17,8 +17,15 @@
     "url": "https://github.com/KiwiDu/SDFCanvas"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
     "@types/react-css-modules": "^4.6.2",
     "awesome-typescript-loader": "^5.2.1",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-typescript": "^7.0.0-alpha.19",
     "cache-loader": "^1.2.2",
     "css-loader": "^1.0.1",
     "html-loader": "^0.5.5",
